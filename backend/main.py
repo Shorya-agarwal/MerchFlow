@@ -57,3 +57,8 @@ def create_transaction(transaction: TransactionCreate, db: Session = Depends(get
     db.refresh(db_transaction)
     
     return db_transaction
+
+
+@app.get("/transactions/")
+def read_transactions(db: Session = Depends(get_db)):
+    return db.query(models.Transaction).all()
