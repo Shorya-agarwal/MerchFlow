@@ -1,20 +1,21 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import TransactionForm from './components/TransactionForm';
-import TransactionList from './components/TransactionList';
+import TransactionForm from '../components/TransactionForm';
+import TransactionList from '../components/TransactionList';
 
 function App() {
   const [transactions, setTransactions] = useState([]);
 
-  // Fetch transactions when the app starts
+  useEffect(() => {
+    fetchTransactions();
+  }, []);
+
   const fetchTransactions = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:8000/transactions/'); // Wait, we need to create this GET endpoint!
-      // NOTE: We only built the POST endpoint in backend. We need to add GET.
-      // For now, let's just handle state locally to update the UI instantly.
-      // We will fix the backend GET in a second.
+      const response = await axios.get('http://127.0.0.1:8000/transactions/');
+      setTransactions(response.data.reverse()); // Show newest first
     } catch (error) {
-      console.error("Error fetching transactions", error);
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -22,7 +23,7 @@ function App() {
   const handleNewTransaction = (newTx) => {
     setTransactions([newTx, ...transactions]);
   };
-
+  
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-900">
       {/* Navbar */}
