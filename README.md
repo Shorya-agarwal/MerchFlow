@@ -18,14 +18,14 @@ The application follows a decoupled client-server architecture. The frontend com
 graph TD
     %% Nodes
     User((User))
-    FE[Frontend SPA<br/>(React + Vite)]
-    BE[Backend API<br/>(FastAPI)]
-    DB[(Database<br/>SQLite)]
-    AI[AI Service<br/>(Google Gemini)]
+    FE["Frontend SPA<br/>(React + Vite)"]
+    BE["Backend API<br/>(FastAPI)"]
+    DB[("Database<br/>(SQLite)")]
+    AI["AI Service<br/>(Google Gemini)"]
 
     %% Edges
     User -->|Interacts| FE
-    FE -->|HTTP JSON| BE
+    FE -->|HTTP/JSON| BE
     BE -->|Classify SKU| AI
     AI -->|Material Tags| BE
     BE -->|Read/Write| DB
@@ -143,3 +143,5 @@ merchflow/
 * **Anomaly Detection:** Using Isolation Forests (Scikit-Learn) to flag fraudulent transactions.
 * **CI/CD:** GitHub Actions pipeline for automated testing.
 
+# 👨‍💻 Author
+Shorya Agarwal | Systems Engineer & C++ Developer | MS CE @TAMU  | [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/shoryaag/)
