@@ -11,20 +11,20 @@ class User(Base):
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
 
-    # Relationship: One user has many transactions
-    transactions = relationship("Transaction", back_populates="owner")
+    # Relationship: One user manages many products
+    products = relationship("Product", back_populates="manager")
 
-class Transaction(Base):
-    __tablename__ = "transactions"
+class Product(Base):
+    __tablename__ = "products"
 
     id = Column(Integer, primary_key=True, index=True)
-    amount = Column(Float)  # Financial value
-    category = Column(String)  # e.g., "Food", "Rent"
-    description = Column(String)
+    description = Column(String) # Product Name (e.g., "Air Max 90")
+    stock_count = Column(Integer)  # Renamed from amount
+    material_type = Column(String)  # Renamed from category (e.g., "Leather", "Mesh")
     date = Column(DateTime(timezone=True), server_default=func.now())
     
     # Link to the User table
     user_id = Column(Integer, ForeignKey("users.id"))
     
-    # Relationship: A transaction belongs to one owner
-    owner = relationship("User", back_populates="transactions")
+    # Relationship: A product belongs to one manager
+    manager = relationship("User", back_populates="products")
